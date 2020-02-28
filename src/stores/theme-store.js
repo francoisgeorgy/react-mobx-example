@@ -1,4 +1,4 @@
-import {observable, action, decorate} from 'mobx'
+import {observable, action, decorate} from 'mobx';
 
 export class ThemeStore {
 
