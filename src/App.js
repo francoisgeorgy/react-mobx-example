@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {Counter} from "./components/Counter";
+import {ThemeToggler} from "./components/ThemeToggler";
+import {useStores} from "./hooks/use-stores";
+// import {observer} from "mobx-react";
+import ObserverComponent from "./components/ObserverComponent";
+import PartialObserverComponent from "./components/PartialObserverComponent";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// const App = observer(() => {
+const App = () => {
+    const {counterStore} = useStores();
+    // const {themeStore} = useStores();
+    return (
+        <div className="App">
+            app
+            <Counter/>
+            <ThemeToggler/>
+{/*
+            <div>{themeStore.theme}</div>
+            <div>{counterStore.count}</div>
+*/}
+            App not observed: {counterStore.count}
+            <ObserverComponent counterStore={counterStore}/>
+            <PartialObserverComponent counterStore={counterStore}/>
+        </div>
+    );
+};
+//});
 
 export default App;
