@@ -1,15 +1,15 @@
-### Doc:
+## Doc:
 
 - https://mobx.js.org/
 - https://mobx-react.js.org/
 
-### Install:
+## Install:
 
     yarn add mobx mobx-react
     
-### Patterns:
+## Patterns:
 
-Store:
+### Store:
 
     import {observable, action, decorate} from 'mobx';
     export class ThemeStore {
@@ -23,19 +23,23 @@ Store:
         setTheme: action
     });
     
-Context:
+### Context:
 
     import {ThemeStore} from "../stores/theme-store";
     export const storesContext = React.createContext({
         themeStore: new ThemeStore()
     });
     
-Hook:
+The context will be used in the hook below. 
+    
+### Hook:
 
     import { storesContext } from '../contexts'
     export const useStores = () => React.useContext(storesContext);
     
-Functional component fully observed:
+The hook will be used in the functional components.    
+    
+### Functional component fully observed:
         
     import {observer} from 'mobx-react'
     import {useStores} from '../hooks/use-stores'
@@ -49,7 +53,7 @@ Functional component fully observed:
         )
     });
     
-Class component fully observed:
+### Class component fully observed:
     
     import {observer} from 'mobx-react';
     const ObserverComponent = observer(
@@ -67,7 +71,9 @@ Class component fully observed:
     });
     export default ObserverComponent;
 
-Class component partially observed:
+Since this is a class wrapped in observer() we don't need to use the hook nor the context.
+
+### Class component partially observed:
 
     import {Observer} from 'mobx-react';
     class PartialObserverComponent extends Component {
@@ -82,7 +88,7 @@ Class component partially observed:
     }
     export default PartialObserverComponent;
     
-App:
+### App:
     
     import React from 'react';
     import {Counter} from "./components/Counter";
@@ -104,7 +110,7 @@ App:
     };
     export default App;
     
-App observed:
+### App observed:
     
     import React from 'react';
     import './App.css';
@@ -112,8 +118,7 @@ App observed:
     import {useStores} from "./hooks/use-stores";
     import {observer} from "mobx-react";
     import ObserverComponent from "./components/ObserverComponent";
-    import PartialObserverComponent from "./components/PartialObserverComponent";
-    
+    import PartialObserverComponent from "./components/PartialObserverComponent";    
     const App = observer(() => {
         const {counterStore} = useStores();
         return (
